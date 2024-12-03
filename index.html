@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0f0f0f;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #0f0f0f, #1a1a1a);
+            padding: 1rem;
+        }
+
+        .site-name-container {
+            overflow: hidden;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .site-name {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-weight: 300;
+            color: #ffffff;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .letter {
+            display: inline-block;
+            animation: letterAnimation 2s infinite;
+            transform-origin: center;
+        }
+
+        .progress-bar {
+            margin-top: 20px;
+            width: min(160px, 80%);
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            position: absolute;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            animation: progressMove 0.6s ease-in-out infinite;
+        }
+
+        @keyframes letterAnimation {
+            0%, 100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            25% {
+                opacity: 1;
+                transform: translateY(-5px); /* Reduced movement */
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0); /* Return to original position */
+            }
+        }
+
+        @keyframes progressMove {
+            0% { transform: translateX(-150%); }
+            100% { transform: translateX(250%); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .site-name {
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-name {
+                letter-spacing: 1px;
+            }
+        }
+
+        @keyframes letterAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <div class="site-name-container">
+            <div class="site-name">
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const text = "Karta Lucia";
+                        const container = document.querySelector('.site-name');
+                        container.innerHTML = text.split('').map((char, i) => 
+                            `<span class="letter" style="animation-delay: ${i * 0.1}s">${char === ' ' ? '&nbsp;' : char}</span>`
+                        ).join('');
+                    });
+                </script>
+            </div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+</body>
+</html>
