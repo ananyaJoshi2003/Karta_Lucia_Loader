@@ -39,6 +39,10 @@
             align-items: center;
             gap: 0.5rem;
         }
+        .be-part {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            opacity: 0.9;
+        }
         .coming-soon {
             font-size: clamp(1rem, 3vw, 1.5rem);
             opacity: 0.8;
@@ -109,23 +113,32 @@
             <div class="site-name">
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
+                        const bePartText = "be a part of";
                         const mainText = "Karta Lucia";
-                        const comingSoon = "(coming soon)";
+                        const comingSoon = "(hiring soon)";
                         const container = document.querySelector('.site-name');
+                        
+                        // Create and append "be a part of" text
+                        const bePartDiv = document.createElement('div');
+                        bePartDiv.className = 'be-part';
+                        bePartDiv.innerHTML = bePartText.split('').map((char, i) => 
+                            `<span class="letter" style="animation-delay: ${i * 0.1}s">${char === ' ' ? '&nbsp;' : char}</span>`
+                        ).join('');
                         
                         // Create and append main text
                         const mainDiv = document.createElement('div');
                         mainDiv.innerHTML = mainText.split('').map((char, i) => 
-                            `<span class="letter" style="animation-delay: ${i * 0.1}s">${char === ' ' ? '&nbsp;' : char}</span>`
+                            `<span class="letter" style="animation-delay: ${(bePartText.length + i) * 0.1}s">${char === ' ' ? '&nbsp;' : char}</span>`
                         ).join('');
                         
                         // Create and append coming soon text
                         const comingSoonDiv = document.createElement('div');
                         comingSoonDiv.className = 'coming-soon';
                         comingSoonDiv.innerHTML = comingSoon.split('').map((char, i) => 
-                            `<span class="letter" style="animation-delay: ${(mainText.length + i) * 0.1}s">${char === ' ' ? '&nbsp;' : char}</span>`
+                            `<span class="letter" style="animation-delay: ${(bePartText.length + mainText.length + i) * 0.1}s">${char === ' ' ? '&nbsp;' : char}</span>`
                         ).join('');
                         
+                        container.appendChild(bePartDiv);
                         container.appendChild(mainDiv);
                         container.appendChild(comingSoonDiv);
                     });
